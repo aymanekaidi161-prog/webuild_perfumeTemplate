@@ -57,3 +57,31 @@ export const heartBounceReduced: TargetAndTransition = {
   opacity: [0.5, 1],
   transition: { duration: 0.15 },
 }
+
+// ─── Success checkmark ───────────────────────────────────
+
+export const successCheckmark: TargetAndTransition = {
+  scale: [0, 1.2, 1],
+  opacity: [0, 1, 1],
+  transition: { duration: 0.5, ease: luxuryEase },
+}
+
+export const successCheckmarkReduced: TargetAndTransition = {
+  opacity: [0, 1],
+  transition: { duration: 0.2 },
+}
+
+// ─── Drawer slide-in ─────────────────────────────────────
+
+export const drawerPanel: Variants = {
+  hidden:  { x: '100%', opacity: 0 },
+  visible: { x: 0, opacity: 1, transition: { duration: 0.35, ease: luxuryEase } },
+  exit:    { x: '100%', opacity: 0, transition: { duration: 0.25, ease: luxuryEase } },
+}
+
+export const drawerPanelReduced: Variants = {
+  hidden:  { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.2 } },
+  exit:    { opacity: 0, transition: { duration: 0.15 } },
+}
+

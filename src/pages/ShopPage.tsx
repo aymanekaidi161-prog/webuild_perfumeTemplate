@@ -8,7 +8,6 @@ import rawProducts from '../data/products.json'
 import type { Product } from '../data/types'
 
 const products = rawProducts as Product[]
-
 type FilterValue = 'all' | 'men' | 'women' | 'unisex'
 
 export default function ShopPage() {
@@ -27,18 +26,12 @@ export default function ShopPage() {
         {/* Page header */}
         <section className="section-padding pb-10">
           <div className="container mx-auto px-6 text-center">
-            {/* Ornament */}
             <div className="mb-4 flex items-center justify-center gap-4">
               <span className="h-px w-12 bg-gold opacity-30" />
-              <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-gold opacity-60">
-                The House
-              </span>
+              <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-gold opacity-60">The House</span>
               <span className="h-px w-12 bg-gold opacity-30" />
             </div>
-
-            <h1 className="font-display text-4xl font-normal text-cream md:text-5xl">
-              The Collection
-            </h1>
+            <h1 className="font-display text-4xl font-normal text-cream md:text-5xl">The Collection</h1>
             <p className="mt-3 font-sans text-sm text-cream-muted">
               Twelve hand-composed fragrances. Each with a story of its own.
             </p>
@@ -58,7 +51,7 @@ export default function ShopPage() {
       </main>
       <Footer />
 
-      {/* Product detail modal */}
+      {/* Product detail modal — cart/buy now handled via CartContext */}
       <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </>
   )
