@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Root defaults */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-charcoal font-sans text-cream antialiased;
+    min-height: 100vh;
+  }
+
+  /* Heading defaults — serif font */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display tracking-tight;
+  }
+
+  /* Thin scrollbar to match luxury feel */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-charcoal;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-charcoal-border;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gold;
+  }
+
+  /* Selection highlight */
+  ::selection {
+    @apply bg-gold text-charcoal;
+  }
+}
+
+@layer components {
+  /* Gold CTA button — reusable across pages */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-none border border-gold bg-transparent
+      px-8 py-3 font-sans text-sm font-medium uppercase tracking-[0.15em] text-gold
+      transition-all duration-300 hover:bg-gold hover:text-charcoal focus-visible:outline-none
+      focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2
+      focus-visible:ring-offset-charcoal active:scale-[0.98];
+  }
+
+  /* Gold filled variant */
+  .btn-gold-filled {
+    @apply btn-gold bg-gold text-charcoal hover:bg-gold-light hover:border-gold-light;
+  }
+
+  /* Section wrapper */
+  .section-padding {
+    @apply px-6 py-20 md:py-28;
+  }
+}
