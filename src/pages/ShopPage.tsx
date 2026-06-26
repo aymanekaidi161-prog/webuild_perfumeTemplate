@@ -3,6 +3,7 @@ import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 import FilterBar from '../components/shop/FilterBar'
 import ProductGrid from '../components/shop/ProductGrid'
+import ProductModal from '../components/ui/ProductModal'
 import rawProducts from '../data/products.json'
 import type { Product } from '../data/types'
 
@@ -12,6 +13,7 @@ type FilterValue = 'all' | 'men' | 'women' | 'unisex'
 
 export default function ShopPage() {
   const [activeFilter, setActiveFilter] = useState<FilterValue>('all')
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
 
   const filtered =
     activeFilter === 'all'
@@ -51,10 +53,13 @@ export default function ShopPage() {
               {filtered.length} fragrance{filtered.length !== 1 ? 's' : ''}
             </span>
           </div>
-          <ProductGrid products={filtered} />
+          <ProductGrid products={filtered} onCardClick={setSelectedProduct} />
         </section>
       </main>
       <Footer />
+
+      {/* Product detail modal */}
+      <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </>
   )
 }

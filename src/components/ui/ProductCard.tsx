@@ -1,8 +1,17 @@
 import { useState } from 'react'
+import { motion } from 'motion/react'
 import type { Product } from '../../data/types'
+import useReducedMotion from '../../hooks/useReducedMotion'
+import {
+  cardHover,
+  cardHoverReduced,
+  heartBounce,
+  heartBounceReduced,
+} from '../../data/motion'
 
 interface ProductCardProps {
   product: Product
+  onCardClick?: () => void
 }
 
 // SVG perfume bottle silhouette used as image placeholder
@@ -51,45 +60,52 @@ function HeartIcon({ filled }: { filled: boolean }) {
   )
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, onCardClick }: ProductCardProps) {
   const [wishlisted, setWishlisted] = useState(false)
+  const reduced = useReducedMotion()
 
   return (
-    <article
+    <motion.article
       id={`product-card-${product.slug}`}
-      className="group flex flex-col bg-charcoal-card border border-charcoal-border transition-transform duration-300 hover:-translate-y-1"
+      className="group flex cursor-pointer flex-col border border-charcoal-border bg-charcoal-card"
+      whileHover={reduced ? cardHoverReduced : cardHover}
+      onClick={onCardClick}
     >
       {/* Image area */}
       <div className="relative aspect-[3/4] w-full overflow-hidden bg-charcoal">
         <BottlePlaceholder />
 
         {/* Gender tag badge */}
-        <span className="absolute left-3 top-3 font-sans text-[10px] uppercase tracking-[0.15em] text-gold border border-gold/30 bg-charcoal/60 px-2 py-0.5 backdrop-blur-sm">
+        <span className="absolute left-3 top-3 border border-gold/30 bg-charcoal/60 px-2 py-0.5 font-sans text-[10px] uppercase tracking-[0.15em] text-gold backdrop-blur-sm">
           {product.genderTag}
         </span>
 
         {/* Wishlist button */}
-        <button
+        <motion.button
           id={`wishlist-btn-${product.slug}`}
           aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
-          onClick={() => setWishlisted((w) => !w)}
+          onClick={(e) => {
+            e.stopPropagation()
+            setWishlisted((w) => !w)
+          }}
+          animate={wishlisted ? (reduced ? heartBounceReduced : heartBounce) : {}}
           className={`absolute right-3 top-3 transition-colors ${
             wishlisted ? 'text-gold' : 'text-cream-muted hover:text-gold'
           }`}
         >
           <HeartIcon filled={wishlisted} />
-        </button>
+        </motion.button>
       </div>
 
       {/* Card body */}
       <div className="flex flex-1 flex-col p-5">
         {/* Name */}
-        <h3 className="font-display mb-1 text-base font-normal text-cream leading-snug">
+        <h3 className="font-display mb-1 text-base font-normal leading-snug text-cream">
           {product.name}
         </h3>
 
         {/* Short description */}
-        <p className="mb-4 font-sans text-xs leading-relaxed text-cream-muted line-clamp-2 flex-1">
+        <p className="mb-4 flex-1 font-sans text-xs leading-relaxed text-cream-muted line-clamp-2">
           {product.shortDescription}
         </p>
 
@@ -104,10 +120,11 @@ export default function ProductCard({ product }: ProductCardProps) {
         <button
           id={`add-to-cart-btn-${product.slug}`}
           className="btn-gold w-full justify-center text-xs"
+          onClick={(e) => e.stopPropagation()}
         >
           Add to Cart
         </button>
       </div>
-    </article>
+    </motion.article>
   )
 }

@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 import ProductCard from '../components/ui/ProductCard'
+import ProductModal from '../components/ui/ProductModal'
 import rawProducts from '../data/products.json'
 import type { Product } from '../data/types'
 
@@ -77,7 +79,11 @@ function HeroSection() {
   )
 }
 
-function FeaturedSection() {
+function FeaturedSection({
+  onCardClick,
+}: {
+  onCardClick: (product: Product) => void
+}) {
   return (
     <section id="featured-section" className="bg-charcoal section-padding">
       <div className="container mx-auto px-6">
@@ -101,7 +107,11 @@ function FeaturedSection() {
         {/* Featured grid */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {featuredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              onCardClick={() => onCardClick(product)}
+            />
           ))}
         </div>
 
@@ -117,14 +127,19 @@ function FeaturedSection() {
 }
 
 export default function HomePage() {
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+
   return (
     <>
       <Navbar />
       <main>
         <HeroSection />
-        <FeaturedSection />
+        <FeaturedSection onCardClick={setSelectedProduct} />
       </main>
       <Footer />
+
+      {/* Product detail modal */}
+      <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </>
   )
 }
