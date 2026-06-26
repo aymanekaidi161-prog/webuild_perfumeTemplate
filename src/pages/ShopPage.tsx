@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 import FilterBar from '../components/shop/FilterBar'
 import ProductGrid from '../components/shop/ProductGrid'
 import ProductModal from '../components/ui/ProductModal'
+import useScrollReveal from '../hooks/useScrollReveal'
 import rawProducts from '../data/products.json'
 import type { Product } from '../data/types'
 
@@ -13,6 +14,10 @@ type FilterValue = 'all' | 'men' | 'women' | 'unisex'
 export default function ShopPage() {
   const [activeFilter, setActiveFilter] = useState<FilterValue>('all')
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+
+  // Ref passed to ProductGrid — useScrollReveal staggers the card children
+  const gridRef = useRef<HTMLDivElement>(null)
+  useScrollReveal(gridRef as React.RefObject<HTMLElement | null>, { stagger: 0.06, y: 20 })
 
   const filtered =
     activeFilter === 'all'
@@ -46,12 +51,14 @@ export default function ShopPage() {
               {filtered.length} fragrance{filtered.length !== 1 ? 's' : ''}
             </span>
           </div>
-          <ProductGrid products={filtered} onCardClick={setSelectedProduct} />
+          <ProductGrid
+            products={filtered}
+            onCardClick={setSelectedProduct}
+            containerRef={gridRef}
+          />
         </section>
       </main>
       <Footer />
-
-      {/* Product detail modal — cart/buy now handled via CartContext */}
       <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </>
   )

@@ -103,7 +103,7 @@ export default function WishlistDrawer() {
             </div>
 
             {/* Items */}
-            <div className="flex-1 overflow-y-auto px-6 py-4">
+            <div className="flex-1 overflow-y-auto px-6 py-4" data-lenis-prevent>
               {wishlist.length === 0 ? (
                 <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
                   <span className="text-cream-muted opacity-20">
