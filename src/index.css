@@ -23,6 +23,45 @@
     @apply font-display tracking-tight;
   }
 
+  /* ─── Arabic Typography ────────────────────────────────────────────────────
+     Markazi Text (headings) + Tajawal (body) swap in when lang="ar".
+     Arabic script renders visually ~15% smaller than Latin at the same px,
+     so we also scale headings up via em to maintain visual parity.
+  ──────────────────────────────────────────────────────────────────────── */
+  [lang="ar"] {
+    font-family: 'Tajawal', system-ui, sans-serif;
+    letter-spacing: 0; /* Arabic script must not have letter-spacing */
+  }
+
+  [lang="ar"] h1,
+  [lang="ar"] h2,
+  [lang="ar"] h3,
+  [lang="ar"] h4,
+  [lang="ar"] h5,
+  [lang="ar"] h6,
+  [lang="ar"] .font-display {
+    font-family: 'Markazi Text', Georgia, serif;
+    letter-spacing: 0;
+    font-weight: 500; /* Markazi Text 500 matches Playfair 400 visually */
+  }
+
+  /* Size compensation — Arabic script renders visually smaller */
+  [lang="ar"] h1 {
+    font-size: 1.2em;
+    line-height: 1.3;
+  }
+  [lang="ar"] h2 {
+    font-size: 1.15em;
+    line-height: 1.35;
+  }
+  [lang="ar"] h3 {
+    font-size: 1.1em;
+  }
+
+  [lang="ar"] .font-sans {
+    font-family: 'Tajawal', system-ui, sans-serif;
+  }
+
   /* Thin scrollbar to match luxury feel */
   ::-webkit-scrollbar {
     width: 6px;

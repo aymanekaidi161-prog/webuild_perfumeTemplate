@@ -1,5 +1,6 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useSearchParams } from 'react-router-dom'
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 import FilterBar from '../components/shop/FilterBar'
@@ -13,9 +14,21 @@ const products = rawProducts as Product[]
 type FilterValue = 'all' | 'men' | 'women' | 'unisex'
 
 export default function ShopPage() {
-  const [activeFilter, setActiveFilter] = useState<FilterValue>('all')
+  const [searchParams] = useSearchParams()
+  const initialFilter = (['men', 'women', 'unisex'].includes(searchParams.get('filter') ?? '') ? searchParams.get('filter') : 'all') as FilterValue
+  const [activeFilter, setActiveFilter] = useState<FilterValue>(initialFilter)
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const { t } = useTranslation()
+
+  // Sync filter if user navigates to /shop?filter=X directly
+  useEffect(() => {
+    const f = searchParams.get('filter')
+    if (f && ['men', 'women', 'unisex'].includes(f)) {
+      setActiveFilter(f as FilterValue)
+    } else {
+      setActiveFilter('all')
+    }
+  }, [searchParams])
 
   const gridRef = useRef<HTMLDivElement>(null)
   useScrollReveal(gridRef as React.RefObject<HTMLElement | null>, { stagger: 0.06, y: 20 })

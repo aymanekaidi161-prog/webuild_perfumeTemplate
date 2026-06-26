@@ -21,7 +21,9 @@ const config: Config = {
       },
       fontFamily: {
         display: ['"Playfair Display"', 'Georgia', 'serif'],
+        'display-ar': ['"Markazi Text"', 'Georgia', 'serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        'sans-ar': ['Tajawal', 'system-ui', 'sans-serif'],
       },
       container: {
         center: true,

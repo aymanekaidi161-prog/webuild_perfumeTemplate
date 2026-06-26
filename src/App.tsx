@@ -4,6 +4,8 @@ import useLenis from './hooks/useLenis'
 import useDir from './hooks/useDir'
 import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
+import AboutPage from './pages/AboutPage'
+import ContactPage from './pages/ContactPage'
 import CartDrawer from './components/ui/CartDrawer'
 import WishlistDrawer from './components/ui/WishlistDrawer'
 import BuyModal from './components/ui/BuyModal'
@@ -16,6 +18,8 @@ function AppInner() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/shop" element={<ShopPage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/contact" element={<ContactPage />} />
     </Routes>
   )
 }

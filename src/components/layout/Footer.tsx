@@ -1,16 +1,45 @@
-import { Link } from 'react-router-dom'
+import { useCallback } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
-function FooterColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
+// Navigates to a path and scrolls to a hash anchor after navigation settles
+function useHashNavigate() {
+  const navigate = useNavigate()
+  return useCallback((path: string, hash?: string) => {
+    navigate(path)
+    if (hash) {
+      // Give the new page a tick to mount, then scroll to the anchor
+      setTimeout(() => {
+        const el = document.getElementById(hash)
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 120)
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }, [navigate])
+}
+
+interface FooterLink {
+  label: string
+  href: string
+  path: string
+  hash?: string
+}
+
+function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) {
+  const navigate = useHashNavigate()
   return (
     <div>
       <h3 className="mb-5 font-sans text-xs uppercase tracking-[0.2em] text-gold">{title}</h3>
       <ul className="space-y-3">
         {links.map((link) => (
           <li key={link.href}>
-            <Link to={link.href} className="font-sans text-sm text-cream-muted transition-colors hover:text-cream">
+            <button
+              onClick={() => navigate(link.path, link.hash)}
+              className="font-sans text-sm font-light text-cream transition-colors hover:text-gold text-start"
+            >
               {link.label}
-            </Link>
+            </button>
           </li>
         ))}
       </ul>
@@ -21,21 +50,21 @@ function FooterColumn({ title, links }: { title: string; links: { label: string;
 export default function Footer() {
   const { t } = useTranslation()
 
-  const shopLinks = [
-    { label: t('footer.allFragrances'), href: '/shop' },
-    { label: t('footer.forHim'), href: '/shop?filter=men' },
-    { label: t('footer.forHer'), href: '/shop?filter=women' },
-    { label: t('footer.unisex'), href: '/shop?filter=unisex' },
+  const shopLinks: FooterLink[] = [
+    { label: t('footer.allFragrances'), href: '/shop', path: '/shop' },
+    { label: t('footer.forHim'), href: '/shop?filter=men', path: '/shop?filter=men' },
+    { label: t('footer.forHer'), href: '/shop?filter=women', path: '/shop?filter=women' },
+    { label: t('footer.unisex'), href: '/shop?filter=unisex', path: '/shop?filter=unisex' },
   ]
-  const aboutLinks = [
-    { label: t('footer.ourStory'), href: '/about' },
-    { label: t('footer.ingredients'), href: '/about#ingredients' },
-    { label: t('footer.sustainability'), href: '/about#sustainability' },
+  const aboutLinks: FooterLink[] = [
+    { label: t('footer.ourStory'), href: '/about#story', path: '/about', hash: 'story' },
+    { label: t('footer.ingredients'), href: '/about#ingredients', path: '/about', hash: 'ingredients' },
+    { label: t('footer.sustainability'), href: '/about#sustainability', path: '/about', hash: 'sustainability' },
   ]
-  const contactLinks = [
-    { label: t('footer.contactUs'), href: '/contact' },
-    { label: t('footer.faq'), href: '/contact#faq' },
-    { label: t('footer.stores'), href: '/contact#stores' },
+  const contactLinks: FooterLink[] = [
+    { label: t('footer.contactUs'), href: '/contact', path: '/contact' },
+    { label: t('footer.faq'), href: '/contact#faq', path: '/contact', hash: 'faq' },
+    { label: t('footer.stores'), href: '/contact#stores', path: '/contact', hash: 'stores' },
   ]
   const legalLinks = [t('footer.privacy'), t('footer.terms'), t('footer.cookies')]
 
