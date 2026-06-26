@@ -10,16 +10,7 @@ import type { Product } from '../../data/types'
 
 const productMap = Object.fromEntries((rawProducts as Product[]).map((p) => [p.id, p]))
 
-function MiniBottle() {
-  return (
-    <svg viewBox="0 0 80 120" className="h-12 w-8 opacity-20" xmlns="http://www.w3.org/2000/svg">
-      <rect x="32" y="0" width="16" height="8" rx="2" fill="#C9A96E" />
-      <rect x="28" y="8" width="24" height="6" rx="1" fill="#C9A96E" />
-      <path d="M28 14 Q14 28 14 38 L14 105 Q14 114 24 114 L56 114 Q66 114 66 105 L66 38 Q66 28 52 14 Z" fill="#C9A96E" opacity="0.15" />
-      <path d="M28 14 Q14 28 14 38 L14 105 Q14 114 24 114 L56 114 Q66 114 66 105 L66 38 Q66 28 52 14 Z" fill="none" stroke="#C9A96E" strokeWidth="1.5" opacity="0.4" />
-    </svg>
-  )
-}
+
 
 function HeartFilledIcon() {
   return (
