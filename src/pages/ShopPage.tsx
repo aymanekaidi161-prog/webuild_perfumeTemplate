@@ -5,7 +5,6 @@ import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 import FilterBar from '../components/shop/FilterBar'
 import ProductGrid from '../components/shop/ProductGrid'
-import ProductModal from '../components/ui/ProductModal'
 import useScrollReveal from '../hooks/useScrollReveal'
 import rawProducts from '../data/products.json'
 import type { Product } from '../data/types'
@@ -17,7 +16,6 @@ export default function ShopPage() {
   const [searchParams] = useSearchParams()
   const initialFilter = (['men', 'women', 'unisex'].includes(searchParams.get('filter') ?? '') ? searchParams.get('filter') : 'all') as FilterValue
   const [activeFilter, setActiveFilter] = useState<FilterValue>(initialFilter)
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const { t } = useTranslation()
 
   // Sync filter if user navigates to /shop?filter=X directly
@@ -65,13 +63,11 @@ export default function ShopPage() {
           </div>
           <ProductGrid
             products={filtered}
-            onCardClick={setSelectedProduct}
             containerRef={gridRef}
           />
         </section>
       </main>
       <Footer />
-      <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </>
   )
 }

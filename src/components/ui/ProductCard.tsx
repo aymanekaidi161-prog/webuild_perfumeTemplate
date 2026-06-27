@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import type { Product } from '../../data/types'
@@ -8,7 +9,6 @@ import { cardHover, cardHoverReduced, heartBounce, heartBounceReduced } from '..
 
 interface ProductCardProps {
   product: Product
-  onCardClick?: () => void
 }
 
 
@@ -22,7 +22,8 @@ function HeartIcon({ filled }: { filled: boolean }) {
   )
 }
 
-export default function ProductCard({ product, onCardClick }: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
+  const navigate = useNavigate()
   const reduced = useReducedMotion()
   const { wishlist, toggleWishlist, addToCart } = useCart()
   const { t } = useTranslation()
@@ -41,7 +42,7 @@ export default function ProductCard({ product, onCardClick }: ProductCardProps) 
       id={`product-card-${product.slug}`}
       className="group flex cursor-pointer flex-col border border-charcoal-border bg-charcoal-card"
       whileHover={reduced ? cardHoverReduced : cardHover}
-      onClick={onCardClick}
+      onClick={() => navigate(`/product/${product.slug}`)}
     >
       {/* Image area */}
       <div className="relative aspect-[3/4] w-full overflow-hidden bg-charcoal">
@@ -63,8 +64,8 @@ export default function ProductCard({ product, onCardClick }: ProductCardProps) 
       </div>
 
       {/* Card body */}
-      <div className="flex flex-1 flex-col p-5">
-        <h3 className="font-display mb-1 text-base font-normal leading-snug text-cream">{t(`products.${product.id}.name`, { defaultValue: product.name })}</h3>
+      <div className="flex flex-1 flex-col p-3 sm:p-5">
+        <h3 className="font-display mb-1 text-sm font-normal leading-snug text-cream sm:text-base">{t(`products.${product.id}.name`, { defaultValue: product.name })}</h3>
         <p className="mb-4 flex-1 font-sans text-xs leading-relaxed text-cream-muted line-clamp-2">{t(`products.${product.id}.shortDescription`, { defaultValue: product.shortDescription })}</p>
         <div className="mb-4">
           <span className="font-sans text-sm font-medium text-cream">

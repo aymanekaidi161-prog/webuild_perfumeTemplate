@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage'
 import ShopPage from './pages/ShopPage'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
+import ProductDetailPage from './pages/ProductDetailPage'
 import CartDrawer from './components/ui/CartDrawer'
 import WishlistDrawer from './components/ui/WishlistDrawer'
 import BuyModal from './components/ui/BuyModal'
@@ -20,6 +21,7 @@ function AppInner() {
       <Route path="/shop" element={<ShopPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<ContactPage />} />
+      <Route path="/product/:slug" element={<ProductDetailPage />} />
     </Routes>
   )
 }

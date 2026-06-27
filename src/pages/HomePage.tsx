@@ -5,8 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useTranslation } from 'react-i18next'
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
-import ProductCard from '../components/ui/ProductCard'
-import ProductModal from '../components/ui/ProductModal'
+import ProductGrid from '../components/shop/ProductGrid'
 import useReducedMotion from '../hooks/useReducedMotion'
 import useScrollReveal from '../hooks/useScrollReveal'
 import rawProducts from '../data/products.json'
@@ -95,29 +94,25 @@ function HeroSection() {
 
 // ─── Featured Section ─────────────────────────────────────────────────────────
 
-function FeaturedSection({ onCardClick }: { onCardClick: (p: Product) => void }) {
+function FeaturedSection() {
   const { t } = useTranslation()
   const gridRef = useRef<HTMLDivElement>(null)
   useScrollReveal(gridRef as React.RefObject<HTMLElement | null>, { stagger: 0.1, y: 28 })
 
   return (
-    <section id="featured-section" className="bg-charcoal section-padding">
-      <div className="container mx-auto px-6">
-        <div className="mb-14 text-center">
-          <div className="mb-4 flex items-center justify-center gap-4">
-            <span className="h-px w-12 bg-gold opacity-30" />
-            <span className="font-sans text-[10px] uppercase tracking-[0.3em] rtl:tracking-normal rtl:text-[11px] rtl:font-medium text-gold opacity-60">{t('featured.eyebrow')}</span>
-            <span className="h-px w-12 bg-gold opacity-30" />
-          </div>
-          <h2 className="font-display text-3xl font-normal text-cream md:text-4xl">{t('featured.heading')}</h2>
-          <p className="mt-3 font-sans text-sm text-cream-muted">{t('featured.subheading')}</p>
+    <section id="featured-section" className="bg-charcoal pt-20 md:pt-28">
+      <div className="container mx-auto px-6 mb-14 text-center">
+        <div className="mb-4 flex items-center justify-center gap-4">
+          <span className="h-px w-12 bg-gold opacity-30" />
+          <span className="font-sans text-[10px] uppercase tracking-[0.3em] rtl:tracking-normal rtl:text-[11px] rtl:font-medium text-gold opacity-60">{t('featured.eyebrow')}</span>
+          <span className="h-px w-12 bg-gold opacity-30" />
         </div>
+        <h2 className="font-display text-3xl font-normal text-cream md:text-4xl">{t('featured.heading')}</h2>
+        <p className="mt-3 font-sans text-sm text-cream-muted">{t('featured.subheading')}</p>
+      </div>
 
-        <div ref={gridRef} className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} onCardClick={() => onCardClick(product)} />
-          ))}
-        </div>
+      <div className="container mx-auto px-6 pb-20">
+        <ProductGrid products={featuredProducts} containerRef={gridRef} />
 
         <div className="mt-14 text-center">
           <Link to="/shop" className="btn-gold" id="featured-view-all-btn">{t('featured.viewAll')}</Link>
@@ -130,17 +125,14 @@ function FeaturedSection({ onCardClick }: { onCardClick: (p: Product) => void })
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
-
   return (
     <>
       <Navbar />
       <main>
         <HeroSection />
-        <FeaturedSection onCardClick={setSelectedProduct} />
+        <FeaturedSection />
       </main>
       <Footer />
-      <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
     </>
   )
 }

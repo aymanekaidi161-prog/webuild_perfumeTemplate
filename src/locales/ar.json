@@ -272,5 +272,9 @@
     "store3Address": "812 Madison Avenue، نيويورك، NY 10065، الولايات المتحدة",
     "store3Hours": "الاثنين–السبت: 11:00–19:00، الأحد: 12:00–17:00",
     "store3Phone": "+1 212 000 0000"
+  },
+  "product": {
+    "backToShop": "العودة إلى المتجر",
+    "youMightAlsoLike": "قد يعجبك أيضاً"
   }
 }
