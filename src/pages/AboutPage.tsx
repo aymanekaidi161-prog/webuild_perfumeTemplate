@@ -19,6 +19,19 @@ function SectionHeader({ eyebrow, heading, subheading }: { eyebrow: string; head
   )
 }
 
+// ─── Icons ───────────────────────────────────────────────────────────────────
+const LeafIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-gold"><path d="M11 20A7 7 0 0 1 14 6h7v7a7 7 0 0 1-7 7h-3Z"/><path d="M14 6v6a3 3 0 0 1-3 3h-4"/></svg>
+)
+
+const RecycleIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-gold"><path d="M7 15.3 2.3 11 7 6.7"/><path d="m17 8.7 4.7 4.3-4.7 4.3"/><path d="M2.3 11h14.4c1.8 0 3.3 1.5 3.3 3.3 0 1.8-1.5 3.3-3.3 3.3H11"/></svg>
+)
+
+const GlobeIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-gold"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+)
+
 // ─── About Page ────────────────────────────────────────────────────────────────
 export default function AboutPage() {
   const { t } = useTranslation()
@@ -107,45 +120,45 @@ export default function AboutPage() {
             />
             <div ref={ingredientsRef} className="grid grid-cols-1 gap-8 md:grid-cols-3">
               {/* Oud */}
-              <article className="group border border-charcoal-border bg-charcoal-card p-0 transition-colors hover:border-gold/40">
-                <div className="aspect-[3/2] overflow-hidden">
+              <article className="group flex flex-col overflow-hidden border border-charcoal-border bg-charcoal-card p-0 transition-colors hover:border-gold/40">
+                <div className="aspect-[3/2] w-full overflow-hidden">
                   <img
                     src="/images/products/oud-noir-1.png"
                     alt={t('about.ing1Name')}
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <div className="p-6">
+                <div className="flex w-full flex-1 flex-col p-6">
                   <span className="mb-1 block font-sans text-[9px] uppercase tracking-[0.2em] rtl:tracking-normal text-gold opacity-60">{t('about.ing1Origin')}</span>
                   <h3 className="font-display mb-3 text-xl font-normal text-cream">{t('about.ing1Name')}</h3>
                   <p className="font-sans text-xs leading-relaxed text-cream-muted">{t('about.ing1Desc')}</p>
                 </div>
               </article>
               {/* Rose */}
-              <article className="group border border-charcoal-border bg-charcoal-card p-0 transition-colors hover:border-gold/40">
-                <div className="aspect-[3/2] overflow-hidden">
+              <article className="group flex flex-col overflow-hidden border border-charcoal-border bg-charcoal-card p-0 transition-colors hover:border-gold/40">
+                <div className="aspect-[3/2] w-full overflow-hidden">
                   <img
                     src="/images/products/rose-de-minuit-1.png"
                     alt={t('about.ing2Name')}
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <div className="p-6">
+                <div className="flex w-full flex-1 flex-col p-6">
                   <span className="mb-1 block font-sans text-[9px] uppercase tracking-[0.2em] rtl:tracking-normal text-gold opacity-60">{t('about.ing2Origin')}</span>
                   <h3 className="font-display mb-3 text-xl font-normal text-cream">{t('about.ing2Name')}</h3>
                   <p className="font-sans text-xs leading-relaxed text-cream-muted">{t('about.ing2Desc')}</p>
                 </div>
               </article>
               {/* Amber */}
-              <article className="group border border-charcoal-border bg-charcoal-card p-0 transition-colors hover:border-gold/40">
-                <div className="aspect-[3/2] overflow-hidden">
+              <article className="group flex flex-col overflow-hidden border border-charcoal-border bg-charcoal-card p-0 transition-colors hover:border-gold/40">
+                <div className="aspect-[3/2] w-full overflow-hidden">
                   <img
                     src="/images/products/ambre-dore-1.png"
                     alt={t('about.ing3Name')}
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <div className="p-6">
+                <div className="flex w-full flex-1 flex-col p-6">
                   <span className="mb-1 block font-sans text-[9px] uppercase tracking-[0.2em] rtl:tracking-normal text-gold opacity-60">{t('about.ing3Origin')}</span>
                   <h3 className="font-display mb-3 text-xl font-normal text-cream">{t('about.ing3Name')}</h3>
                   <p className="font-sans text-xs leading-relaxed text-cream-muted">{t('about.ing3Desc')}</p>
@@ -165,12 +178,12 @@ export default function AboutPage() {
             />
             <div ref={sustainabilityRef} className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-3">
               {[
-                { icon: '🌿', titleKey: 'about.sus1Title', descKey: 'about.sus1Desc' },
-                { icon: '♻️', titleKey: 'about.sus2Title', descKey: 'about.sus2Desc' },
-                { icon: '🌍', titleKey: 'about.sus3Title', descKey: 'about.sus3Desc' },
+                { icon: <LeafIcon />, titleKey: 'about.sus1Title', descKey: 'about.sus1Desc' },
+                { icon: <RecycleIcon />, titleKey: 'about.sus2Title', descKey: 'about.sus2Desc' },
+                { icon: <GlobeIcon />, titleKey: 'about.sus3Title', descKey: 'about.sus3Desc' },
               ].map(({ icon, titleKey, descKey }) => (
                 <div key={titleKey} className="border border-charcoal-border p-8 text-center">
-                  <span className="mb-4 block text-3xl">{icon}</span>
+                  <div className="mb-4 flex justify-center">{icon}</div>
                   <div className="mb-3 flex justify-center">
                     <span className="h-px w-8 bg-gold opacity-30" />
                   </div>

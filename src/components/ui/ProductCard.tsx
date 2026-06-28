@@ -74,7 +74,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
         <button
           id={`add-to-cart-btn-${product.slug}`}
-          className={`btn-gold w-full justify-center text-xs transition-colors ${justAdded ? 'text-gold' : ''}`}
+          className={`btn-gold w-full justify-center whitespace-nowrap text-[10px] sm:text-xs tracking-[0.1em] sm:tracking-[0.15em] transition-colors ${justAdded ? 'text-gold' : ''}`}
           onClick={handleAddToCart}
         >
           {justAdded ? t('card.added') : t('card.addToCart')}

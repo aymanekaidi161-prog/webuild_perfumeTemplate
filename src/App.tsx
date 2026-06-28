@@ -10,19 +10,23 @@ import ProductDetailPage from './pages/ProductDetailPage'
 import CartDrawer from './components/ui/CartDrawer'
 import WishlistDrawer from './components/ui/WishlistDrawer'
 import BuyModal from './components/ui/BuyModal'
+import ScrollToTop from './components/ui/ScrollToTop'
 
 // AppInner is inside BrowserRouter so routing context is available if needed
 function AppInner() {
   useLenis()
   useDir() // sets html[dir] + html[lang] whenever language changes
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
       <Route path="/shop" element={<ShopPage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/product/:slug" element={<ProductDetailPage />} />
     </Routes>
+    </>
   )
 }
 

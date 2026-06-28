@@ -145,6 +145,7 @@ export default function BuyModal() {
             variants={panelVars}
             initial="hidden" animate="visible" exit="exit"
             onClick={(e) => e.stopPropagation()}
+            data-lenis-prevent
           >
             <button id="buy-modal-close" onClick={closeBuy} aria-label="Close"
               className="absolute end-4 top-4 z-20 text-cream-muted transition-colors hover:text-gold">
