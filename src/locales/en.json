@@ -93,10 +93,34 @@
     "successTitle": "Thank you, {{name}}",
     "successSubtext": "We'll be in touch shortly.",
     "successDemoNote": "Demo only — no order was placed",
-    "successClose": "Close",
+    "successClose": "Back to Shop",
     "langEn": "English",
     "langFr": "Français",
     "langAr": "العربية"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "eyebrow": "Secure Order",
+    "contactHeading": "Contact Details",
+    "contactSubheading": "We'll use these details to confirm your order.",
+    "summaryHeading": "Order Summary",
+    "backToShop": "← Back to Shop",
+    "continueShopping": "Continue Shopping",
+    "emptyTitle": "Your cart is empty",
+    "emptySubtext": "Add some fragrances to your cart before checking out.",
+    "emptyBrowse": "Browse the Collection",
+    "singleItem": "Your Selection",
+    "qty": "Qty",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "item_one": "{{count}} item",
+    "item_other": "{{count}} items"
+  },
+  "cookie": {
+    "text": "We use cookies to refine your browsing experience and personalize Maison Aurel.",
+    "accept": "Accept",
+    "deny": "Decline",
+    "label": "Cookie consent"
   },
   "footer": {
     "tagline": "Handcrafted fragrances for the quietly discerning. Each bottle, a story.",

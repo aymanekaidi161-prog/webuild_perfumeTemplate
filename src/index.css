@@ -105,3 +105,14 @@
     @apply px-6 py-20 md:py-28;
   }
 }
+
+@layer utilities {
+  /* Hide scrollbar but keep scroll functionality (for filter bar mobile) */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}

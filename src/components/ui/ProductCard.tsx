@@ -57,14 +57,18 @@ export default function ProductCard({ product }: ProductCardProps) {
           aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
           onClick={(e) => { e.stopPropagation(); toggleWishlist(product.id) }}
           animate={wishlisted ? (reduced ? heartBounceReduced : heartBounce) : {}}
-          className={`absolute end-3 top-3 transition-colors ${wishlisted ? 'text-gold' : 'text-cream-muted hover:text-gold'}`}
+          className={`absolute end-2.5 top-2.5 flex h-8 w-8 items-center justify-center transition-all duration-200 ${
+            wishlisted
+              ? 'bg-gold/20 text-gold'
+              : 'bg-charcoal/50 text-cream-muted hover:bg-gold/10 hover:text-gold'
+          }`}
         >
           <HeartIcon filled={wishlisted} />
         </motion.button>
       </div>
 
       {/* Card body */}
-      <div className="flex flex-1 flex-col p-3 sm:p-5">
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
         <h3 className="font-display mb-1 text-sm font-normal leading-snug text-cream sm:text-base">{t(`products.${product.id}.name`, { defaultValue: product.name })}</h3>
         <p className="mb-4 flex-1 font-sans text-xs leading-relaxed text-cream-muted line-clamp-2">{t(`products.${product.id}.shortDescription`, { defaultValue: product.shortDescription })}</p>
         <div className="mb-4">

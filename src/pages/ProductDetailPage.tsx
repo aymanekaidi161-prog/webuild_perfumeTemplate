@@ -61,6 +61,11 @@ export default function ProductDetailPage() {
     setTimeout(() => setJustAdded(false), 1000)
   }
 
+  const handleBuyNow = () => {
+    openBuyNow(product)
+    navigate('/checkout')
+  }
+
   const relatedProducts = products
     .filter((p) => p.genderTag === product.genderTag && p.id !== product.id)
     .slice(0, 4)
@@ -95,7 +100,21 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Right — Details */}
-            <div className="flex flex-1 flex-col p-6 md:p-12">
+            <div className="relative flex flex-1 flex-col p-6 md:p-12">
+              {/* Heart / Wishlist — absolute top-right of info panel */}
+              <motion.button
+                id={`page-wishlist-btn-${product.slug}`}
+                aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+                onClick={() => toggleWishlist(product.id)}
+                animate={wishlisted ? (reduced ? heartBounceReduced : heartBounce) : {}}
+                className={`absolute end-5 top-5 flex h-11 w-11 shrink-0 items-center justify-center border transition-all duration-200 ${
+                  wishlisted
+                    ? 'border-gold bg-gold/10 text-gold'
+                    : 'border-charcoal-border bg-charcoal/60 text-cream-muted hover:border-gold hover:text-gold'
+                }`}
+              >
+                <HeartIcon filled={wishlisted} />
+              </motion.button>
               <h1 className="font-display text-3xl font-normal text-cream md:text-5xl mb-4">{t(`products.${product.id}.name`, { defaultValue: product.name })}</h1>
               <p className="font-sans text-xl font-medium text-gold mb-8">
                 {product.currency === 'USD' ? '$' : product.currency}{product.price}
@@ -116,18 +135,8 @@ export default function ProductDetailPage() {
                 ))}
               </div>
 
-              {/* Actions */}
+              {/* Actions — Add to Cart + Buy Now (heart is now top-right) */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mt-auto pt-8 border-t border-charcoal-border">
-                <motion.button
-                  id={`page-wishlist-btn-${product.slug}`}
-                  aria-label={wishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
-                  onClick={() => toggleWishlist(product.id)}
-                  animate={wishlisted ? (reduced ? heartBounceReduced : heartBounce) : {}}
-                  className={`flex h-14 w-14 sm:w-auto sm:px-6 shrink-0 items-center justify-center border transition-colors ${
-                    wishlisted ? 'border-gold text-gold' : 'border-charcoal-border text-cream-muted hover:border-gold hover:text-gold'
-                  }`}>
-                  <HeartIcon filled={wishlisted} />
-                </motion.button>
                 <button id={`page-add-to-cart-${product.slug}`}
                   className="btn-gold flex-1 justify-center h-14"
                   onClick={handleAddToCart}>
@@ -135,7 +144,7 @@ export default function ProductDetailPage() {
                 </button>
                 <button id={`page-buy-now-${product.slug}`}
                   className="btn-gold-filled flex-1 justify-center h-14"
-                  onClick={() => openBuyNow(product)}>
+                  onClick={handleBuyNow}>
                   {t('modal.buyNow')}
                 </button>
               </div>

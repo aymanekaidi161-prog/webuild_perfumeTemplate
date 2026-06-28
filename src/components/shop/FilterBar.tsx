@@ -18,21 +18,35 @@ export default function FilterBar({ active, onChange }: FilterBarProps) {
   ]
 
   return (
-    <div className="flex flex-wrap items-center gap-2" role="group" aria-label={t('filter.label')}>
-      {filters.map((f) => (
-        <button
-          key={f.value}
-          id={`filter-btn-${f.value}`}
-          onClick={() => onChange(f.value)}
-          className={`rounded-none px-5 py-2 font-sans text-xs uppercase tracking-[0.12em] transition-all duration-200 ${
-            active === f.value
-              ? 'border border-gold bg-gold text-charcoal'
-              : 'border border-charcoal-border text-cream-muted hover:border-gold hover:text-gold'
-          }`}
-        >
-          {f.label}
-        </button>
-      ))}
+    <div
+      className="no-scrollbar flex items-center gap-2 overflow-x-auto pb-0.5"
+      role="group"
+      aria-label={t('filter.label')}
+    >
+      {filters.map((f) => {
+        const isActive = active === f.value
+        return (
+          <button
+            key={f.value}
+            id={`filter-btn-${f.value}`}
+            onClick={() => onChange(f.value)}
+            className={`relative shrink-0 min-w-[72px] px-5 py-2.5 font-sans text-[11px] uppercase tracking-[0.18em] transition-all duration-300 rtl:tracking-normal rtl:text-xs focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold/50 ${
+              isActive
+                ? 'border border-gold text-gold'
+                : 'border border-charcoal-border text-cream-muted hover:border-gold/50 hover:text-cream'
+            }`}
+          >
+            {f.label}
+            {/* Active indicator — thin gold underline */}
+            {isActive && (
+              <span
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 h-px w-4 bg-gold"
+                aria-hidden="true"
+              />
+            )}
+          </button>
+        )
+      })}
     </div>
   )
 }

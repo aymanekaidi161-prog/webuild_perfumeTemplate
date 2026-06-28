@@ -93,10 +93,34 @@
     "successTitle": "Merci, {{name}}",
     "successSubtext": "Nous vous contacterons bientôt.",
     "successDemoNote": "Démonstration uniquement — aucune commande passée",
-    "successClose": "Fermer",
+    "successClose": "Retour à la Boutique",
     "langEn": "English",
     "langFr": "Français",
     "langAr": "العربية"
+  },
+  "checkout": {
+    "title": "Commande",
+    "eyebrow": "Commande Sécurisée",
+    "contactHeading": "Coordonnées",
+    "contactSubheading": "Nous utiliserons ces informations pour confirmer votre commande.",
+    "summaryHeading": "Récapitulatif",
+    "backToShop": "← Retour à la Boutique",
+    "continueShopping": "Continuer les Achats",
+    "emptyTitle": "Votre panier est vide",
+    "emptySubtext": "Ajoutez des fragrances à votre panier avant de commander.",
+    "emptyBrowse": "Parcourir la Collection",
+    "singleItem": "Votre Sélection",
+    "qty": "Qté",
+    "subtotal": "Sous-total",
+    "total": "Total",
+    "item_one": "{{count}} article",
+    "item_other": "{{count}} articles"
+  },
+  "cookie": {
+    "text": "Nous utilisons des cookies pour améliorer votre navigation et personnaliser votre expérience Maison Aurel.",
+    "accept": "Accepter",
+    "deny": "Refuser",
+    "label": "Consentement aux cookies"
   },
   "footer": {
     "tagline": "Fragrances artisanales pour les esprits discrets. Chaque flacon, une histoire.",

@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { useCart } from '../../hooks/useCart'
@@ -23,6 +23,7 @@ function MiniBottle() {
 
 export default function CartDrawer() {
   const reduced = useReducedMotion()
+  const navigate = useNavigate()
   const { openDrawer, cartItems, removeFromCart, updateQuantity, openCartBuy, closeDrawer } = useCart()
   const { t, i18n } = useTranslation()
   const isOpen = openDrawer === 'cart'
@@ -149,7 +150,7 @@ export default function CartDrawer() {
                   <span className="font-sans text-lg font-medium text-gold">${subtotal}</span>
                 </div>
                 <button id="cart-proceed-to-buy"
-                  onClick={() => { openCartBuy(); closeDrawer() }}
+                  onClick={() => { openCartBuy(); closeDrawer(); navigate('/checkout') }}
                   className="btn-gold-filled mb-3 w-full justify-center">
                   {t('cart.proceedToBuy')}
                 </button>
